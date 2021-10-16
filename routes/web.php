@@ -132,3 +132,62 @@ Route::get('format', function(){
     ];
     return view ('format' , compact('data'));
 });
+
+
+//route bagian db seeder
+//model post
+Route::get('/testmodel', function() {
+    $query = App\Models\Post::all() ;
+    return $query;
+    });
+
+    Route::get('/testmodel2', function() {
+    $query = App\Models\Post::find(1) ;
+    return $query;
+        });
+
+    Route::get('/testmodel3', function() {
+    $query = App\Models\Post::where('title','like','%Juz Amma%')->get();
+    return $query;
+            });
+
+    Route::get('/testmodel4', function() {
+    $post = App\Models\Post::find(1);
+    $post->title = "hijaiyah";
+    $post->save();
+    return $post;
+
+                });
+
+    Route::get('/testmodel5', function() {
+    $post = App\Models\Post::find(1);
+    $post->delete();
+                   // check data di database
+
+                    });
+
+    Route::get('/testmodel6', function() {
+    $post = new App\Models\Post;
+    $post->title = "7 Amalan Pembuka Jodoh";
+    $post->content = "shalat malam, sedekah, puasa sunah, silaturahmi, senyum, doa, tobat";
+    $post->save();
+    return $post;
+                        // check record baru di database
+
+                        });
+
+//model latihan
+Route::get('/test-post', function () {
+    $query = App\Models\Post::all();
+    return view('test-post', compact('query'));
+});
+
+
+Route::get('/data-dosen', function () {
+    $query = App\Models\Dosen::all();
+    return view('dosen', compact('query'));
+});
+Route::get('/data-mhs', function () {
+    $query = App\Models\Mahasiswa::all();
+    return view('mhs', compact('query'));
+});
